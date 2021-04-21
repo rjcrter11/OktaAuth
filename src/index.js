@@ -1,11 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Security } from '@okta/okta-react'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const oktaConfig = {
+  issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
+  redirect_url: `${window.location.origin}/login/callback`,
+  client_id: process.env.REACT_APP_OKTA_CLIENT_ID
+}
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Security {...oktaConfig} >
+        <App />
+      </Security  >
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
