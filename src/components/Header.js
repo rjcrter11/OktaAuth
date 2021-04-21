@@ -16,4 +16,4 @@ const Header = () => (
     </AppBar>
 )
 
-export default Header
+export default Header;

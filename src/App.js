@@ -1,12 +1,31 @@
+import React, { Fragment } from 'react';
+import {
+  CssBaseline,
+  withStyles
+} from '@material-ui/core';
+import Header from './components/Header';
+import Home from './pages/Home';
 
-import './App.css';
+const styles = theme => ({
+  main: {
+    padding: theme.spacing(3),
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(2),
+    },
+  },
+});
 
-function App() {
+function App({ classes }) {
   return (
-    <div className="App">
-      Fuck!
-    </div>
+    <Fragment>
+      <CssBaseline>
+        <Header />
+        <main className={classes.main} >
+          <Home />
+        </main>
+      </CssBaseline>
+    </Fragment>
   );
 }
 
-export default App;
+export default withStyles(styles)(App);
