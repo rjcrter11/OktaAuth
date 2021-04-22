@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { LoginCallback } from '@okta/okta-react'
 import {
   CssBaseline,
   withStyles
@@ -17,14 +19,16 @@ const styles = theme => ({
 
 function App({ classes }) {
   return (
-    <Fragment>
+    <>
       <CssBaseline>
         <Header />
         <main className={classes.main} >
-          <Home />
+          {/* <Home /> */}
+          <Route exact path='/' component={Home} />
+          <Route path='login/callback' component={LoginCallback} />
         </main>
       </CssBaseline>
-    </Fragment>
+    </>
   );
 }
 

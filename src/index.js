@@ -5,11 +5,17 @@ import { Security } from '@okta/okta-react'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const { REACT_APP_OKTA_ORG_URL, REACT_APP_OKTA_CLIENT_ID } = process.env;
+
+
+
 const oktaConfig = {
-  issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
-  redirect_url: `${window.location.origin}/login/callback`,
-  client_id: process.env.REACT_APP_OKTA_CLIENT_ID
+  issuer: REACT_APP_OKTA_ORG_URL,
+  redirectUri: `${window.location.origin}/login/callback`,
+  client_id: REACT_APP_OKTA_CLIENT_ID
 }
+
+
 
 ReactDOM.render(
   <React.StrictMode>
