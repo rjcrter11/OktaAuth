@@ -3,17 +3,31 @@ import React from 'react';
 import {
     AppBar,
     Toolbar,
-    Typography
+    Typography,
+    withStyles
 } from '@material-ui/core';
+import LoginButton from './LoginButton'
+// import classes from '*.module.css';
 
-const Header = () => (
-    <AppBar position="static" >
-        <Toolbar>
-            <Typography variant="h6" color="inherit" >
-                My React App
+const styles = {
+    flex: {
+        flex: 1
+    }
+}
+
+const Header = () => {
+
+    return (
+        <AppBar position="static" >
+            <Toolbar>
+                <Typography variant="h6" color="inherit" >
+                    My React App
             </Typography>
-        </Toolbar>
-    </AppBar>
-)
+                {/* <div className={classes.flex} /> */}
+                <LoginButton />
+            </Toolbar>
+        </AppBar>
+    )
+}
 
-export default Header;
+export default withStyles(styles)(Header)
