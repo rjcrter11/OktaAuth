@@ -15,7 +15,7 @@ const styles = {
     }
 }
 
-const Header = () => {
+const Header = ({ classes }) => {
 
     return (
         <AppBar position="static" >
@@ -23,7 +23,7 @@ const Header = () => {
                 <Typography variant="h6" color="inherit" >
                     My React App
             </Typography>
-                {/* <div className={classes.flex} /> */}
+                <div className={classes.flex} />
                 <LoginButton />
             </Toolbar>
         </AppBar>

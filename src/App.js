@@ -23,9 +23,8 @@ function App({ classes }) {
       <CssBaseline>
         <Header />
         <main className={classes.main} >
-          {/* <Home /> */}
           <Route exact path='/' component={Home} />
-          <Route path='login/callback' component={LoginCallback} />
+          <Route exact path='/login/callback' component={LoginCallback} />
         </main>
       </CssBaseline>
     </>

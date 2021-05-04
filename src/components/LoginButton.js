@@ -11,20 +11,12 @@ import { useOktaAuth } from '@okta/okta-react';
 
 function LoginButton() {
 
-    const { authState, authService } = useOktaAuth;
+    const { authState, authService } = useOktaAuth();
     const [user, setUser] = useState(null);
     const [menuAnchorEl, setMenuAnchorEl] = useState(null);
-    const [userAuthenticated, setUserAuthenticated] = useState(null);
+    // const [userAuthenticated, setUserAuthenticated] = useState(null);
 
-    // const isAuthenticated = async () => {
-    //     if (!authState.isAuthenticated) {
-    //         setUser(null)
-    //     } else {
-    //         await authService.getUser().then((response) => {
-    //             setUser(response.sub)
-    //         })
-    //     }
-    // } 
+    console.log("Auth: ", authService);
 
     const handleMenuOpen = e => {
         setMenuAnchorEl(e.target)
@@ -34,13 +26,16 @@ function LoginButton() {
         setMenuAnchorEl(null)
     }
 
-    const isAuthenticated = async () => {
-        const authenticated = authState.isAuthenticated;
-        if (authenticated !== userAuthenticated) {
-            await authService.getUser();
-            setUserAuthenticated(user);
-        }
-    }
+    // const isAuthenticated = async () => {
+    //     const authenticated = authService.isAuthenticated;
+    //     if (authenticated !== userAuthenticated) {
+    //         const user = await authService.getUser();
+    //         setUser(user)
+    //         setUserAuthenticated(authenticated)
+    //     }
+    // }
+
+
 
     const login = () => authService.login('/');
     const logout = () => {
@@ -49,8 +44,19 @@ function LoginButton() {
     }
 
     useEffect(() => {
+        const isAuthenticated = async () => {
+            if (!authState.isAuthenticated) {
+                setUser(null)
+            } else {
+                await authService.getUser().then((res) => {
+                    console.log('Auth response: ', res);
+                    setUser(res.sub)
+                })
+            }
+        }
         isAuthenticated()
-    }, [])
+
+    }, [authState, authService])
 
     const menuPosition = {
         vertical: 'top',
@@ -60,9 +66,34 @@ function LoginButton() {
 
     return (
         <div>
-            {/* if (!authenticated) return <Button color="inherit" onClick={this.login}>Login</Button>; */}
+            <IconButton onClick={handleMenuOpen} color='inherit' >
+                <AccountCircle />
+            </IconButton>
 
-           The fuck
+            <Menu
+                anchorEl={menuAnchorEl}
+                anchorOrigin={menuPosition}
+                transformOrigin={menuPosition}
+                open={!!menuAnchorEl}
+                onClose={handleMenuClose}
+            >
+                <MenuItem onClick={logout}>
+                    <ListItemText
+                        primary='Logout'
+                        secondary={user && user.name}
+                    />
+                </MenuItem>
+
+            </Menu>
+
+            {
+                !user ? (
+                    <Button color='inherit' onClick={login}>Login</Button>
+                ) : (
+                    null
+                )
+
+            }
 
         </div>
     );
