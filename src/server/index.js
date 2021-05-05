@@ -10,7 +10,7 @@ const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
     clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
-    issuer: `${process.env.REACT_APP_OKTA_OPRG_URL}/oauth2/default`,
+    issuer: `${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`,
 });
 
 const app = express();
