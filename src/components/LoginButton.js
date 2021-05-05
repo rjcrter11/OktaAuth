@@ -50,7 +50,7 @@ function LoginButton() {
             } else {
                 await authService.getUser().then((res) => {
                     console.log('Auth response: ', res);
-                    setUser(res.sub)
+                    setUser(res)
                 })
             }
         }
