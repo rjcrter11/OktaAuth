@@ -66,9 +66,12 @@ function LoginButton() {
 
     return (
         <div>
-            <IconButton onClick={handleMenuOpen} color='inherit' >
-                <AccountCircle />
-            </IconButton>
+            { user ? (
+                <IconButton onClick={handleMenuOpen} color='inherit' >
+                    <AccountCircle />
+                </IconButton>
+            ) : null}
+
 
             <Menu
                 anchorEl={menuAnchorEl}
