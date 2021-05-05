@@ -26,16 +26,6 @@ function LoginButton() {
         setMenuAnchorEl(null)
     }
 
-    // const isAuthenticated = async () => {
-    //     const authenticated = authService.isAuthenticated;
-    //     if (authenticated !== userAuthenticated) {
-    //         const user = await authService.getUser();
-    //         setUser(user)
-    //         setUserAuthenticated(authenticated)
-    //     }
-    // }
-
-
 
     const login = () => authService.login('/');
     const logout = () => {
@@ -49,7 +39,6 @@ function LoginButton() {
                 setUser(null)
             } else {
                 await authService.getUser().then((res) => {
-                    console.log('Auth response: ', res);
                     setUser(res)
                 })
             }
@@ -70,7 +59,7 @@ function LoginButton() {
                 <IconButton onClick={handleMenuOpen} color='inherit' >
                     <AccountCircle />
                 </IconButton>
-            ) : null}
+            ) : (<Button color='inherit' onClick={login}>Login</Button>)}
 
 
             <Menu
@@ -88,15 +77,6 @@ function LoginButton() {
                 </MenuItem>
 
             </Menu>
-
-            {
-                !user ? (
-                    <Button color='inherit' onClick={login}>Login</Button>
-                ) : (
-                    null
-                )
-
-            }
 
         </div>
     );
